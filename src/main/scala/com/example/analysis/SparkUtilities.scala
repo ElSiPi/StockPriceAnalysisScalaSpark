@@ -4,7 +4,7 @@ import org.apache.spark.sql.{DataFrame, SparkSession}
 
 object SparkUtilities extends App{
   /**
-   * A mothos for creating a spark session
+   * A method for creating a spark session
    * @param appName
    * @param verbose
    * @param master

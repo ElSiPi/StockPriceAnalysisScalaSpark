@@ -60,7 +60,7 @@ object StockPriceAnalysis extends App{
  val tradingResult = tradingFreqDF
     .groupBy("ticker")
     .agg(avg("trading").alias("averageTrading"))
-    .orderBy(round(col("averageTrading"), 2).desc)//.orderBy(desc("averageTrading"))
+    .orderBy(desc("averageTrading"))//.orderBy(desc("averageTrading"))
 
   tradingResult.show(false)
   SparkUtilities.saveParquet(tradingResult, "./src/resources/analysis/parquet/mostTradedAvg")
