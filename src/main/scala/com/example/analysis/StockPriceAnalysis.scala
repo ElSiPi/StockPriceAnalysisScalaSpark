@@ -99,7 +99,7 @@ object StockPriceAnalysis extends App{
 
   val ndf = supervised
     .fit(dfWithPreviousDay) //prepares the formula
-    .transform(dfWithPreviousDay) //generally transform will create the new data
+    .transform(dfWithPreviousDay) //generally will create the new data
 
 
     ndf.show(10, false)
@@ -122,12 +122,12 @@ object StockPriceAnalysis extends App{
 //
 //  val summary = lrModel.summary
 //
-//  //to truly test this model we should be using different stocks or different dates for these 3 stocks
-//
 //  val predictedDf = lrModel.transform(test)
 //
 //  predictedDf.show(10, false)
 
+  //Decision tree regression
+  //Source - https://spark.apache.org/docs/latest/ml-classification-regression.html#decision-tree-regression
   import org.apache.spark.ml.Pipeline
   import org.apache.spark.ml.evaluation.RegressionEvaluator
   import org.apache.spark.ml.feature.VectorIndexer
@@ -143,7 +143,7 @@ object StockPriceAnalysis extends App{
     .setMaxCategories(2)
     .fit(cleanDf)
 
-  // Split the data into training and test sets (30% held out for testing).
+  // Split the data into training and test sets (25% held out for testing).
   val Array(trainingData, testData) = cleanDf.randomSplit(Array(0.75, 0.25))
 
   // Train a DecisionTree model.
@@ -162,7 +162,7 @@ object StockPriceAnalysis extends App{
   val predictions = model.transform(testData)
 
   // Select example rows to display.
-  predictions.select("prediction", "label", "features").show(5)
+  predictions.select("prediction", "label", "features").show(20, false)
 
   // Select (prediction, true label) and compute test error.
   val evaluator = new RegressionEvaluator()
