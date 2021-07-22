@@ -5,6 +5,10 @@ import org.apache.spark.sql.functions.{avg, col, desc, expr, round, udf, stddev_
 
 import scala.math.sqrt
 
+/**
+ * @author Elina
+ * Solution of exercises in connection with stock price analysis using Apache Spark
+ */
 object StockPriceAnalysis extends App{
 
   val spark = SparkUtilities.createSpark("analysisProject")
